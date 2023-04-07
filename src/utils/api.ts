@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://65.109.179.104:3306';
+const API_BASE_URL = 'http://localhost:3001';
 
 export const apiRequest = async (
   endpoint: string,
