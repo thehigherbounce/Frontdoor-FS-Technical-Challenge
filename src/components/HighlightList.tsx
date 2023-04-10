@@ -3,7 +3,6 @@ import TagInput from "./TagInput";
 import { HighlightContext } from "../contexts/HighlightContext";
 import Summary from "./Summary";
 import HighlightItem from "./HighlightItem";
-// import { addTagToHighlight, fetchHighlights } from '../utils/api';
 
 interface HighlightListProps {
     onRemoveHighlight: (id: string) => void;
@@ -15,7 +14,7 @@ interface HighlightListProps {
     }) => void;
 }
 
-const HighlightsList1: React.FC<HighlightListProps> = ({ onRemoveHighlight, onUpdateHighlight }) => {
+const HighlightsList: React.FC<HighlightListProps> = ({ onRemoveHighlight, onUpdateHighlight }) => {
     const { highlights } = React.useContext(HighlightContext);
 
     return (
@@ -49,4 +48,4 @@ const HighlightsList1: React.FC<HighlightListProps> = ({ onRemoveHighlight, onUp
         </div>
     )
 }
-export default HighlightsList1;
+export default HighlightsList;

@@ -5,13 +5,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        contentScript: path.join(__dirname, 'build/contentScript.js'),
-        background: path.join(__dirname, 'build/background.js'),
-        popup: path.join(__dirname, 'build/popup.js'),
+        contentScript: path.join(__dirname, 'src/chrome/content.ts'),
+        background: path.join(__dirname, 'src/chrome/background.ts'),
     },
     output: {
         path: path.join(__dirname, 'build'),
-        filename: '[name].bundle.js',
+        filename: 'static/js/[name].bundle.js',
         clean: true,
     },
     resolve: {

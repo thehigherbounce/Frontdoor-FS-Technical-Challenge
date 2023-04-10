@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { SummaryTooltipProps } from '../types/summary';
 
-const SummaryTooltip: React.FC<SummaryTooltipProps> = ({ summary, targetRef }) => {
+const SummaryTooltip: React.FC<SummaryTooltipProps> = ({ summary, targetRef, x, y }) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,15 +11,15 @@ const SummaryTooltip: React.FC<SummaryTooltipProps> = ({ summary, targetRef }) =
       if (!tooltip || !target) return;
 
       const rect = target.getBoundingClientRect();
-      tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 5}px`;
-      tooltip.style.left = `${rect.left + window.scrollX}px`;
-      tooltip.style.visibility = 'visible';
+      tooltip.style.top = `${y ? y - 5 : (rect.top + window.scrollY - tooltip.offsetHeight - 5)}px`;
+      tooltip.style.left = `${x ? x : (rect.left + window.scrollX)}px`;
+      tooltip.classList.remove("hidden");
     };
 
     const hideTooltip = () => {
       const tooltip = tooltipRef.current;
       if (!tooltip) return;
-      tooltip.style.visibility = 'hidden';
+      tooltip.classList.add("hidden");
     };
 
     const target = targetRef.current;
@@ -39,7 +39,7 @@ const SummaryTooltip: React.FC<SummaryTooltipProps> = ({ summary, targetRef }) =
   return (
     <div
       ref={tooltipRef}
-      className="frontdoor-tooltip absolute bg-gray-800 text-white p-2 rounded-md text-sm z-50 invisible"
+      className="frontdoor-tooltip fixed bg-gray-800 text-white p-2 rounded-md text-sm z-50 hidden"
       style={{ maxWidth: '300px' }}
     >
       {summary}

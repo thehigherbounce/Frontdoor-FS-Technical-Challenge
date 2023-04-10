@@ -1,5 +1,5 @@
 import React from 'react';
-import { Highlight } from '@src/types/hightlight';
+import { Highlight } from '../types/hightlight';
 
 interface HighlightItemProps {
   highlight: Highlight;

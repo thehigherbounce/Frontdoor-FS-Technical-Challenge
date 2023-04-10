@@ -11,7 +11,6 @@ export const apiRequest = async (
     method,
     headers,
   };
-
   if (data) {
     init.body = JSON.stringify(data);
   }

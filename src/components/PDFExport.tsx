@@ -27,7 +27,7 @@ const PDFExport: React.FC<PDFExportProps> = ({ highlights }) => {
         <div>
             <button
                 onClick={exportToPDF}
-                className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+                className="bg-blue-500 text-white px-2 py-1 rounded mt-4"
             >
                 Export to PDF
             </button>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import HighlightsList1 from "./HighlightList1";
+import HighlightsList from "./HighlightList";
 import { apiRequest } from '../utils/api';
 import PDFExport from './PDFExport';
 import EnableToggle from "./EnableToggle";
+import Highlight from "./Highlight";
 import { HighlightContext } from '../contexts/HighlightContext';
-
+import Tooltip from "./Tooltip";
 
 const Popup: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState<boolean>(true);
@@ -19,14 +20,6 @@ const Popup: React.FC = () => {
             console.error('Failed to fetch enabled state:', error);
         }
     };
-    const summarize = async () => {
-        try {
-            const response = await apiRequest('/openai');
-            console.log(response)
-        } catch (error) {
-            console.error('Failed to fetch enabled state:', error);
-        }
-    }
     const toggleEnabled = async () => {
         try {
             const response = await apiRequest('/settings/toggle', 'PUT');
@@ -35,13 +28,11 @@ const Popup: React.FC = () => {
             console.error('Failed to toggle enabled state:', error);
         }
     };
-    
     useEffect(() => {
         fetchEnabledState(); // Get enable status
-        summarize();
         // const handleMessage = (message: any) => {
-        //     if(message.selectedText) {
-        //         console.log("handleMessage");
+        //     if(message.type == '') {
+        //         console.log(message)
         //     }
         // }
         // chrome.runtime.onMessage.addListener(handleMessage);
@@ -49,16 +40,16 @@ const Popup: React.FC = () => {
         //     chrome.runtime.onMessage.removeListener(handleMessage);
         // }
     }, []);
-
     return (
         <div className="p-4 bg-white text-gray-800">
-            <h1 className="text-xl font-bold">Frontdoor Chrome Extension</h1>
             <EnableToggle isEnabled={isEnabled} toggleEnabled={toggleEnabled} />
-            <HighlightsList1
-                onRemoveHighlight={removeHighlight}
-                onUpdateHighlight={updateHighlight}
-            />
-            <PDFExport highlights={highlights} />
+            {isEnabled && <>
+                <HighlightsList
+                    onRemoveHighlight={removeHighlight}
+                    onUpdateHighlight={updateHighlight}
+                />
+                <PDFExport highlights={highlights} />
+            </>}
         </div>
     )
 }
