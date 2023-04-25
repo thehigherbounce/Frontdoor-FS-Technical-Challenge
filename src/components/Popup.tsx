@@ -6,6 +6,8 @@ import EnableToggle from "./EnableToggle";
 import Highlight from "./Highlight";
 import { HighlightContext } from '../contexts/HighlightContext';
 import Tooltip from "./Tooltip";
+import ShadowCounter from "./ShadowCounter";
+import "../style.css";
 
 const Popup: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState<boolean>(true);
@@ -43,6 +45,7 @@ const Popup: React.FC = () => {
     return (
         <div className="p-4 bg-white text-gray-800">
             <EnableToggle isEnabled={isEnabled} toggleEnabled={toggleEnabled} />
+            <div className="clip-button"></div>
             {isEnabled && <>
                 <HighlightsList
                     onRemoveHighlight={removeHighlight}
